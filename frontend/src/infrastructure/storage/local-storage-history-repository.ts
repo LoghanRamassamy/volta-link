@@ -29,16 +29,19 @@ export class LocalStorageHistoryRepository implements HistoryRepository {
     }
 
     try {
-      const parsed = JSON.parse(stored) as Record<string, unknown>[];
-      return parsed.map((item) =>
-        ShortLink.create({
-          code: item.code as string,
-          createdAt: new Date(item.createdAt as string),
-          expiresAt: ExpirationDate.create((item.expiresAt as string) || null),
-          id: item.id as string,
-          originalUrl: OriginalUrl.create(item.originalUrl as string),
-        }),
-      );
+      const parsed = JSON.parse(stored);
+      if (!Array.isArray(parsed)) return [];
+      
+      return parsed.map((item) => {
+        if (!item || typeof item !== "object") throw new Error("Invalid format");
+        return ShortLink.create({
+          code: String(item.code),
+          createdAt: new Date(String(item.createdAt)),
+          expiresAt: ExpirationDate.create(item.expiresAt ? String(item.expiresAt) : null),
+          id: String(item.id),
+          originalUrl: OriginalUrl.create(String(item.originalUrl)),
+        });
+      });
     } catch (error) {
       console.error("Failed to parse history from local storage:", error);
       return [];

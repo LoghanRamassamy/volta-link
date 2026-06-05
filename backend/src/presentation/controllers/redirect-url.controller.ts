@@ -8,7 +8,7 @@ export class RedirectUrlController {
 
   public handle = async (req: Request, res: Response): Promise<void> => {
     try {
-      const code = req.params.code as string;
+      const code = String(req.params.code);
       const originalUrl = await this.getOriginalUrlUseCase.execute(code);
       res.redirect(302, originalUrl);
     } catch (error: unknown) {

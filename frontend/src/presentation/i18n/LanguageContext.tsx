@@ -12,8 +12,10 @@ interface LanguageContextProps {
 const LanguageContext = createContext<LanguageContextProps | undefined>(undefined);
 
 const getInitialLanguage = (): Language => {
-  const savedLang = localStorage.getItem("volta-lang") as Language;
-  if (savedLang && (savedLang === "en" || savedLang === "fr")) {
+  const rawLang = localStorage.getItem("volta-lang");
+  const savedLang = rawLang === "en" || rawLang === "fr" ? rawLang : undefined;
+
+  if (savedLang) {
     return savedLang;
   }
 
