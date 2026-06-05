@@ -51,7 +51,7 @@ export const App: React.FC = () => {
 
       {copiedCode && (
         <div className="copied-toast">
-          <span>📋</span> Lien copié avec succès !
+          <span>📋</span> Link copied successfully!
         </div>
       )}
     </>

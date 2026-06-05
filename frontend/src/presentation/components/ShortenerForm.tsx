@@ -42,11 +42,11 @@ export const ShortenerForm: React.FC<ShortenerFormProps> = ({
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="url-input">Adresse URL à réduire</label>
+          <label htmlFor="url-input">URL to shorten</label>
           <input
             id="url-input"
             type="text"
-            placeholder="https://example.com/un/lien/tres/long/a/reduire"
+            placeholder="https://example.com/a/very/long/link/to/shorten"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             required
@@ -56,11 +56,11 @@ export const ShortenerForm: React.FC<ShortenerFormProps> = ({
 
         <div className="form-row">
           <div className="form-group">
-            <label htmlFor="custom-code-input">Code Personnalisé (Optionnel)</label>
+            <label htmlFor="custom-code-input">Custom Code (Optional)</label>
             <input
               id="custom-code-input"
               type="text"
-              placeholder="Ex: mon-code"
+              placeholder="Ex: my-code"
               value={customCode}
               onChange={(e) => setCustomCode(e.target.value)}
               disabled={loading}
@@ -68,7 +68,7 @@ export const ShortenerForm: React.FC<ShortenerFormProps> = ({
           </div>
 
           <div className="form-group">
-            <label htmlFor="expires-input">Date d'Expiration (Optionnelle)</label>
+            <label htmlFor="expires-input">Expiration Date (Optional)</label>
             <input
               id="expires-input"
               type="datetime-local"
@@ -80,19 +80,19 @@ export const ShortenerForm: React.FC<ShortenerFormProps> = ({
         </div>
 
         <button type="submit" className="btn-primary" style={{ width: '100%' }} disabled={loading}>
-          {loading ? 'Génération du lien en cours...' : 'Raccourcir l\'URL'}
+          {loading ? 'Generating short link...' : 'Shorten URL'}
         </button>
       </form>
 
       {result && (
         <div className="result-card">
-          <label>Votre lien raccourci est prêt :</label>
+          <label>Your short link is ready:</label>
           <div className="result-row">
             <a href={shortUrl} target="_blank" rel="noopener noreferrer" className="result-url">
               {shortUrl}
             </a>
             <button className="btn-secondary" onClick={() => onCopy(result.code, shortUrl)}>
-              {copiedCode === result.code ? 'Copié ! ✅' : 'Copier'}
+              {copiedCode === result.code ? 'Copied! ✅' : 'Copy'}
             </button>
           </div>
         </div>

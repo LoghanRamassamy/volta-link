@@ -14,14 +14,14 @@ export const HistoryList: React.FC<HistoryListProps> = ({ history, copiedCode, o
 
   return (
     <div className="glass-panel">
-      <h2>📋 Liens Récents</h2>
+      <h2>📋 Recent Links</h2>
       <div className="table-container">
         <table>
           <thead>
             <tr>
-              <th>URL Originale</th>
-              <th>Code Court</th>
-              <th>Création</th>
+              <th>Original URL</th>
+              <th>Short Code</th>
+              <th>Created</th>
               <th>Expiration</th>
               <th>Action</th>
             </tr>
@@ -54,10 +54,10 @@ export const HistoryList: React.FC<HistoryListProps> = ({ history, copiedCode, o
                   <td>
                     {link.expiresAt.value ? (
                       <span className={isExpired ? 'badge badge-expired' : 'badge badge-active'}>
-                        {isExpired ? 'Expiré' : `Exp: ${new Date(link.expiresAt.value).toLocaleString()}`}
+                        {isExpired ? 'Expired' : `Exp: ${new Date(link.expiresAt.value).toLocaleString()}`}
                       </span>
                     ) : (
-                      <span className="badge badge-never">Jamais</span>
+                      <span className="badge badge-never">Never</span>
                     )}
                   </td>
                   <td>
@@ -65,7 +65,7 @@ export const HistoryList: React.FC<HistoryListProps> = ({ history, copiedCode, o
                       className="btn-secondary"
                       onClick={() => onCopy(link.code, shortUrl)}
                     >
-                      {copiedCode === link.code ? 'Copié !' : 'Copier'}
+                      {copiedCode === link.code ? 'Copied!' : 'Copy'}
                     </button>
                   </td>
                 </tr>
