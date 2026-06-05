@@ -1,10 +1,6 @@
 import React from 'react';
 import './presentation/styles/index.css';
-import { Header } from './presentation/components/Header';
-import { ShortenerForm } from './presentation/components/ShortenerForm';
-import { HistoryList } from './presentation/components/HistoryList';
-import { useShortener } from './presentation/hooks/use-shortener';
-import { useTranslation } from './presentation/i18n/LanguageContext';
+import { HomePage } from './presentation/components/pages/HomePage';
 
 // Infrastructure Adapters
 import { HttpShortLinkGateway } from './infrastructure/api/http-short-link-gateway';
@@ -23,41 +19,11 @@ const shortenUrlUseCase = new ShortenUrlUseCase(gateway, historyRepo);
 const getHistoryUseCase = new GetHistoryUseCase(historyRepo);
 
 export const App: React.FC = () => {
-  const {
-    loading,
-    error,
-    result,
-    history,
-    copiedCode,
-    shortenUrl,
-    copyToClipboard,
-  } = useShortener(shortenUrlUseCase, getHistoryUseCase);
-
-  const { t } = useTranslation();
-
   return (
-    <>
-      <Header />
-      <ShortenerForm
-        loading={loading}
-        error={error}
-        result={result}
-        copiedCode={copiedCode}
-        onShorten={shortenUrl}
-        onCopy={copyToClipboard}
-      />
-      <HistoryList
-        history={history}
-        copiedCode={copiedCode}
-        onCopy={copyToClipboard}
-      />
-
-      {copiedCode && (
-        <div className="copied-toast">
-          <span>📋</span> {t.toast.success}
-        </div>
-      )}
-    </>
+    <HomePage 
+      shortenUrlUseCase={shortenUrlUseCase} 
+      getHistoryUseCase={getHistoryUseCase} 
+    />
   );
 };
 
