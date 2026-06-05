@@ -1,26 +1,30 @@
 # Volta Link ⚡
 
-Volta Link is a modern, full-stack URL shortener built with **Clean Architecture** and **Domain-Driven Design (DDD)**. 
+Volta Link is a modern, full-stack URL shortener built with **Clean Architecture**, **Domain-Driven Design (DDD)**, and **Atomic Design**. It strictly adheres to functional programming principles, ensuring absolute immutability and zero nested conditionals across the entire codebase.
 
-## 🏗️ Architecture
+## 🏗️ Architecture & Paradigms
 
-The project strictly follows Clean Architecture principles, ensuring that the core business logic (Domain) is isolated from external frameworks, databases, and UI components. Both Frontend and Backend share the same architectural pattern.
+The project strictly follows architectural best practices, ensuring that the core business logic is isolated from external frameworks, databases, and UI components. 
 
-1. **Domain Layer**: Contains Entities (`ShortLink`) and Value Objects (`OriginalUrl`, `UrlCode`, `ExpirationDate`) to guarantee immutability and valid states.
+1. **Domain Layer**: Contains Entities (`ShortLink`) and Value Objects (`OriginalUrl`, `UrlCode`, `ExpirationDate`) to guarantee valid states.
 2. **Application Layer**: Contains Use Cases (`ShortenUrlUseCase`, `GetOriginalUrlUseCase`, `GetHistoryUseCase`).
-3. **Presentation Layer**: Express Controllers (Backend) / React Components (Frontend).
+3. **Presentation Layer**: 
+   - *Backend*: Pure JSON REST API Express Controllers (No SSR HTML).
+   - *Frontend*: React Components structured using **Atomic Design** (Atoms, Molecules, Organisms, Templates, Pages).
 4. **Infrastructure Layer**: Prisma/SQLite Adapters (Backend) / HTTP Fetch & LocalStorage Adapters (Frontend).
+5. **Strict Functional Programming**: Zero mutability (no `let` variables, pure functions only) and flat logic (no nested `if` statements).
 
 ## 🚀 Tech Stack
 
-- **Frontend**: React, TypeScript, Vite, Vanilla CSS (Glassmorphism design)
-- **Backend**: Node.js, Express, TypeScript, Prisma (ORM), SQLite
+- **Frontend**: React, TypeScript, Vite, **TailwindCSS v4** (Zero-config, premium Glassmorphism design)
+- **Backend**: Node.js **v24 LTS**, Express, TypeScript, Prisma (ORM), SQLite
+- **Security**: Shared API Key authentication (`x-api-key`) between Frontend Gateway and Backend Middleware
 - **DevOps**: Docker, Docker Compose, Makefile
 
 ## 🛠️ Getting Started
 
 ### Prerequisites
-- Node.js (v18+)
+- Node.js (v24 LTS)
 - Docker & Docker Compose (optional, but recommended for easy startup)
 
 ### Quick Start (Using Docker)
@@ -76,8 +80,9 @@ npm test
 ```
 
 ## 🎯 Features
-- Shorten URLs with optional custom aliases.
-- Set optional expiration dates for short links.
-- Immutability and strict validation using Value Objects.
-- Local history of recently shortened links (stored in LocalStorage).
-- Premium, responsive "Glassmorphism" UI with dark mode aesthetics.
+- **URL Shortening**: Shorten URLs with optional custom aliases.
+- **Expirations**: Set optional expiration dates for short links.
+- **i18n (Internationalization)**: Full English (EN) and French (FR) support with system-preference detection and manual toggle.
+- **Security**: Backend API is protected by a secret API Key.
+- **Local History**: Local history of recently shortened links (stored in LocalStorage).
+- **Premium UI**: Responsive, high-end "Glassmorphism" UI built with TailwindCSS v4.
