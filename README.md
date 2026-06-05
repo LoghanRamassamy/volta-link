@@ -16,10 +16,12 @@ The project strictly follows architectural best practices, ensuring that the cor
 
 ## 🚀 Tech Stack
 
-- **Frontend**: React, TypeScript, Vite, **TailwindCSS v4** (Zero-config, premium Glassmorphism design)
-- **Backend**: Node.js **v24 LTS**, Express, TypeScript, Prisma (ORM), SQLite
+- **Frontend**: React, TypeScript, **Vite v6**, **TailwindCSS v4** (Zero-config, premium Glassmorphism design)
+- **Backend**: Node.js **v24 LTS**, Express, TypeScript, **Prisma v7** (ORM with `@prisma/adapter-better-sqlite3`), SQLite
+- **Code Quality**: **oxlint** (strict linting), **oxfmt** (formatting), absolute imports (`@/`) via `tsc-alias` & Vite native resolution
+- **Testing**: **Vitest v4**, `@golevelup/ts-vitest` (advanced mocking), SQLite in-memory integration testing
 - **Security**: Shared API Key authentication (`x-api-key`) between Frontend Gateway and Backend Middleware
-- **DevOps**: Docker, Docker Compose, Makefile
+- **DevOps**: Docker, Docker Compose, Makefile, deterministic builds (`npm ci`)
 
 ## 🛠️ Getting Started
 
@@ -65,18 +67,34 @@ npm run dev
 
 ## 🧪 Testing
 
-Both backend and frontend contain rigorous unit tests for the Domain and Application layers to ensure business rules are enforced.
+Both backend and frontend contain rigorous automated tests powered by **Vitest** and `@golevelup/ts-vitest` to ensure business rules are strictly enforced via deep mocks.
 
-**Run Backend Tests:**
+**Run Backend Unit Tests:**
 ```bash
 cd backend
 npm test
+```
+
+**Run Backend Integration Tests (Prisma + SQLite on-the-fly):**
+```bash
+cd backend
+npm run test:integration
 ```
 
 **Run Frontend Tests:**
 ```bash
 cd frontend
 npm test
+```
+
+## 🧹 Linting & Formatting
+
+The codebase uses **oxlint** and **oxfmt** with strict configurations to maintain clean code standards.
+
+```bash
+# In either backend/ or frontend/ directory
+npm run lint
+npm run format
 ```
 
 ## 🎯 Features
