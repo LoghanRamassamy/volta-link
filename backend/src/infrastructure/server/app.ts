@@ -26,7 +26,8 @@ export function createExpressApp(prisma: PrismaClient): Express {
   const shortenUrlController = new ShortenUrlController(shortenUrlUseCase);
   const redirectUrlController = new RedirectUrlController(getOriginalUrlUseCase);
 
-  const router = createShortLinkRouter(shortenUrlController, redirectUrlController);
+  const apiKey = process.env.API_KEY || 'default-secret-key';
+  const router = createShortLinkRouter(shortenUrlController, redirectUrlController, apiKey);
   app.use(router);
 
   return app;

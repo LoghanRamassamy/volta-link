@@ -1,15 +1,21 @@
 import { Router } from 'express';
 import { ShortenUrlController } from '../controllers/shorten-url.controller';
 import { RedirectUrlController } from '../controllers/redirect-url.controller';
+import { createAuthMiddleware } from '../middlewares/auth.middleware';
 
 export function createShortLinkRouter(
-  shortenController: ShortenUrlController,
-  redirectController: RedirectUrlController
+  shortenUrlController: ShortenUrlController,
+  redirectUrlController: RedirectUrlController,
+  apiKey: string
 ): Router {
   const router = Router();
+  const authMiddleware = createAuthMiddleware(apiKey);
 
-  router.post('/api/shorten', shortenController.handle);
-  router.get('/:code', redirectController.handle);
+  // Protected route: Create a new short link
+  router.post('/api/shorten', authMiddleware, (req, res) => shortenUrlController.handle(req, res));
+
+  // Public route: Redirect using the short code
+  router.get('/:code', (req, res) => redirectUrlController.handle(req, res));
 
   return router;
 }

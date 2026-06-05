@@ -11,6 +11,7 @@ export class HttpShortLinkGateway implements ShortLinkGateway {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'x-api-key': import.meta.env.VITE_API_KEY || 'default-secret-key',
       },
       body: JSON.stringify(params),
     });
