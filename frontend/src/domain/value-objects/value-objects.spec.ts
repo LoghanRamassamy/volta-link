@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { OriginalUrl } from './original-url.vo';
 import { ExpirationDate } from './expiration-date.vo';
 

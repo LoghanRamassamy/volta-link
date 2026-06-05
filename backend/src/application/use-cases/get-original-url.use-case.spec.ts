@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach, vi, Mocked } from 'vitest';
 import { GetOriginalUrlUseCase } from './get-original-url.use-case';
 import { ShortLinkRepository } from '../../domain/repositories/short-link.repository';
 import { ShortLink } from '../../domain/entities/short-link.entity';
@@ -6,14 +7,14 @@ import { UrlCode } from '../../domain/value-objects/url-code.vo';
 import { ExpirationDate } from '../../domain/value-objects/expiration-date.vo';
 
 describe('GetOriginalUrlUseCase', () => {
-  let mockRepo: jest.Mocked<ShortLinkRepository>;
+  let mockRepo: Mocked<ShortLinkRepository>;
   let useCase: GetOriginalUrlUseCase;
 
   beforeEach(() => {
     mockRepo = {
-      save: jest.fn(),
-      findByCode: jest.fn(),
-      codeExists: jest.fn(),
+      save: vi.fn(),
+      findByCode: vi.fn(),
+      codeExists: vi.fn(),
     };
     useCase = new GetOriginalUrlUseCase(mockRepo);
   });

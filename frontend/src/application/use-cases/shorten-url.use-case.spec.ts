@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach, vi, Mocked } from 'vitest';
 import { ShortenUrlUseCase } from './shorten-url.use-case';
 import { ShortLinkGateway } from '../../domain/gateways/short-link-gateway.interface';
 import { HistoryRepository } from '../../domain/gateways/history-repository.interface';
@@ -6,18 +7,18 @@ import { OriginalUrl } from '../../domain/value-objects/original-url.vo';
 import { ExpirationDate } from '../../domain/value-objects/expiration-date.vo';
 
 describe('Frontend ShortenUrlUseCase', () => {
-  let mockGateway: jest.Mocked<ShortLinkGateway>;
-  let mockRepo: jest.Mocked<HistoryRepository>;
+  let mockGateway: Mocked<ShortLinkGateway>;
+  let mockRepo: Mocked<HistoryRepository>;
   let useCase: ShortenUrlUseCase;
 
   beforeEach(() => {
     mockGateway = {
-      shorten: jest.fn(),
+      shorten: vi.fn(),
     };
     mockRepo = {
-      save: jest.fn(),
-      getAll: jest.fn(),
-      clear: jest.fn(),
+      save: vi.fn(),
+      getAll: vi.fn(),
+      clear: vi.fn(),
     };
     useCase = new ShortenUrlUseCase(mockGateway, mockRepo);
   });

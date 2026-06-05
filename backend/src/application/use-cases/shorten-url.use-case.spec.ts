@@ -1,20 +1,21 @@
+import { describe, it, expect, beforeEach, vi, Mocked } from 'vitest';
 import { ShortenUrlUseCase } from './shorten-url.use-case';
 import { ShortLinkRepository } from '../../domain/repositories/short-link.repository';
 import { CodeGenerator } from '../interfaces/code-generator.interface';
 
 describe('ShortenUrlUseCase', () => {
-  let mockRepo: jest.Mocked<ShortLinkRepository>;
-  let mockGenerator: jest.Mocked<CodeGenerator>;
+  let mockRepo: Mocked<ShortLinkRepository>;
+  let mockGenerator: Mocked<CodeGenerator>;
   let useCase: ShortenUrlUseCase;
 
   beforeEach(() => {
     mockRepo = {
-      save: jest.fn(),
-      findByCode: jest.fn(),
-      codeExists: jest.fn(),
+      save: vi.fn(),
+      findByCode: vi.fn(),
+      codeExists: vi.fn(),
     };
     mockGenerator = {
-      generate: jest.fn(),
+      generate: vi.fn(),
     };
     useCase = new ShortenUrlUseCase(mockRepo, mockGenerator);
   });
