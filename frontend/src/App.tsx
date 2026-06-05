@@ -4,6 +4,7 @@ import { Header } from './presentation/components/Header';
 import { ShortenerForm } from './presentation/components/ShortenerForm';
 import { HistoryList } from './presentation/components/HistoryList';
 import { useShortener } from './presentation/hooks/use-shortener';
+import { useTranslation } from './presentation/i18n/LanguageContext';
 
 // Infrastructure Adapters
 import { HttpShortLinkGateway } from './infrastructure/api/http-short-link-gateway';
@@ -32,6 +33,8 @@ export const App: React.FC = () => {
     copyToClipboard,
   } = useShortener(shortenUrlUseCase, getHistoryUseCase);
 
+  const { t } = useTranslation();
+
   return (
     <>
       <Header />
@@ -51,7 +54,7 @@ export const App: React.FC = () => {
 
       {copiedCode && (
         <div className="copied-toast">
-          <span>📋</span> Link copied successfully!
+          <span>📋</span> {t.toast.success}
         </div>
       )}
     </>

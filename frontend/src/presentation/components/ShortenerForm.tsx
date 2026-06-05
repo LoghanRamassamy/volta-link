@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ShortLink } from '../../domain/entities/short-link.entity';
+import { useTranslation } from '../i18n/LanguageContext';
 
 interface ShortenerFormProps {
   loading: boolean;
@@ -22,6 +23,8 @@ export const ShortenerForm: React.FC<ShortenerFormProps> = ({
   const [customCode, setCustomCode] = useState('');
   const [expiresAt, setExpiresAt] = useState('');
 
+  const { t } = useTranslation();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onShorten(url, customCode, expiresAt);
@@ -36,17 +39,17 @@ export const ShortenerForm: React.FC<ShortenerFormProps> = ({
     <div className="glass-panel">
       {error && (
         <div className="alert-error">
-          <span>⚠️</span> {error}
+          <span>⚠️</span> {error === 'DEFAULT_GATEWAY_ERROR' ? t.errors.defaultGatewayError : error}
         </div>
       )}
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="url-input">URL to shorten</label>
+          <label htmlFor="url-input">{t.form.urlLabel}</label>
           <input
             id="url-input"
             type="text"
-            placeholder="https://example.com/a/very/long/link/to/shorten"
+            placeholder={t.form.urlPlaceholder}
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             required
@@ -56,11 +59,11 @@ export const ShortenerForm: React.FC<ShortenerFormProps> = ({
 
         <div className="form-row">
           <div className="form-group">
-            <label htmlFor="custom-code-input">Custom Code (Optional)</label>
+            <label htmlFor="custom-code-input">{t.form.customCodeLabel}</label>
             <input
               id="custom-code-input"
               type="text"
-              placeholder="Ex: my-code"
+              placeholder={t.form.customCodePlaceholder}
               value={customCode}
               onChange={(e) => setCustomCode(e.target.value)}
               disabled={loading}
@@ -68,7 +71,7 @@ export const ShortenerForm: React.FC<ShortenerFormProps> = ({
           </div>
 
           <div className="form-group">
-            <label htmlFor="expires-input">Expiration Date (Optional)</label>
+            <label htmlFor="expires-input">{t.form.expiresLabel}</label>
             <input
               id="expires-input"
               type="datetime-local"
@@ -80,19 +83,19 @@ export const ShortenerForm: React.FC<ShortenerFormProps> = ({
         </div>
 
         <button type="submit" className="btn-primary" style={{ width: '100%' }} disabled={loading}>
-          {loading ? 'Generating short link...' : 'Shorten URL'}
+          {loading ? t.form.submitLoading : t.form.submit}
         </button>
       </form>
 
       {result && (
         <div className="result-card">
-          <label>Your short link is ready:</label>
+          <label>{t.form.resultLabel}</label>
           <div className="result-row">
             <a href={shortUrl} target="_blank" rel="noopener noreferrer" className="result-url">
               {shortUrl}
             </a>
             <button className="btn-secondary" onClick={() => onCopy(result.code, shortUrl)}>
-              {copiedCode === result.code ? 'Copied! ✅' : 'Copy'}
+              {copiedCode === result.code ? t.form.copied : t.form.copy}
             </button>
           </div>
         </div>

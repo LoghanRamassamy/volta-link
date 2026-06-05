@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShortLink } from '../../domain/entities/short-link.entity';
+import { useTranslation } from '../i18n/LanguageContext';
 
 interface HistoryListProps {
   history: ReadonlyArray<ShortLink>;
@@ -8,22 +9,24 @@ interface HistoryListProps {
 }
 
 export const HistoryList: React.FC<HistoryListProps> = ({ history, copiedCode, onCopy }) => {
+  const { t } = useTranslation();
+
   if (history.length === 0) {
     return null;
   }
 
   return (
     <div className="glass-panel">
-      <h2>📋 Recent Links</h2>
+      <h2>{t.history.title}</h2>
       <div className="table-container">
         <table>
           <thead>
             <tr>
-              <th>Original URL</th>
-              <th>Short Code</th>
-              <th>Created</th>
-              <th>Expiration</th>
-              <th>Action</th>
+              <th>{t.history.originalUrl}</th>
+              <th>{t.history.shortCode}</th>
+              <th>{t.history.created}</th>
+              <th>{t.history.expiration}</th>
+              <th>{t.history.action}</th>
             </tr>
           </thead>
           <tbody>
@@ -54,10 +57,10 @@ export const HistoryList: React.FC<HistoryListProps> = ({ history, copiedCode, o
                   <td>
                     {link.expiresAt.value ? (
                       <span className={isExpired ? 'badge badge-expired' : 'badge badge-active'}>
-                        {isExpired ? 'Expired' : `Exp: ${new Date(link.expiresAt.value).toLocaleString()}`}
+                        {isExpired ? t.history.expired : `${t.history.expPrefix} ${new Date(link.expiresAt.value).toLocaleString()}`}
                       </span>
                     ) : (
-                      <span className="badge badge-never">Never</span>
+                      <span className="badge badge-never">{t.history.never}</span>
                     )}
                   </td>
                   <td>
@@ -65,7 +68,7 @@ export const HistoryList: React.FC<HistoryListProps> = ({ history, copiedCode, o
                       className="btn-secondary"
                       onClick={() => onCopy(link.code, shortUrl)}
                     >
-                      {copiedCode === link.code ? 'Copied!' : 'Copy'}
+                      {copiedCode === link.code ? t.history.copied : t.history.copy}
                     </button>
                   </td>
                 </tr>

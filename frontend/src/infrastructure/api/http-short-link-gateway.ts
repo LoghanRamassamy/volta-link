@@ -18,7 +18,7 @@ export class HttpShortLinkGateway implements ShortLinkGateway {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.error || 'An error occurred while communicating with the server.');
+      throw new Error(data.error || 'DEFAULT_GATEWAY_ERROR');
     }
 
     // Map network response DTO to Domain Entity
