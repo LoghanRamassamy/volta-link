@@ -15,18 +15,18 @@ export function useShortener(
 
   // Load history on mount
   useEffect(() => {
-    let active = true;
+    const controller = new AbortController();
     getHistoryUseCase
       .execute()
       .then((data) => {
-        if (active) {
+        if (!controller.signal.aborted) {
           setHistory(data);
         }
       })
       .catch((error) => console.error("Failed to load history:", error));
 
     return () => {
-      active = false;
+      controller.abort();
     };
   }, [getHistoryUseCase]);
 

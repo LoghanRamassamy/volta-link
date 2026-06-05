@@ -11,12 +11,13 @@ export class OriginalUrl {
       throw new Error("URL must be a non-empty string.");
     }
     const trimmed = value.trim();
-    let parsed: URL;
-    try {
-      parsed = new URL(trimmed);
-    } catch {
-      throw new Error("Invalid URL format (e.g. https://example.com).");
-    }
+    const parsed = (() => {
+      try {
+        return new URL(trimmed);
+      } catch {
+        throw new Error("Invalid URL format (e.g. https://example.com).");
+      }
+    })();
     if (!["http:", "https:"].includes(parsed.protocol)) {
       throw new Error("URL must use HTTP or HTTPS protocol.");
     }
