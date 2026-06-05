@@ -1,7 +1,7 @@
-import { ShortLinkRepository } from '../../domain/repositories/short-link.repository';
-import { UrlCode } from '../../domain/value-objects/url-code.vo';
-import { LinkNotFoundError } from '../errors/link-not-found.error';
-import { LinkExpiredError } from '../errors/link-expired.error';
+import type { ShortLinkRepository } from "../../domain/repositories/short-link.repository";
+import { UrlCode } from "../../domain/value-objects/url-code.vo";
+import { LinkNotFoundError } from "../errors/link-not-found.error";
+import { LinkExpiredError } from "../errors/link-expired.error";
 
 export class GetOriginalUrlUseCase {
   constructor(private readonly shortLinkRepository: ShortLinkRepository) {}
@@ -14,8 +14,8 @@ export class GetOriginalUrlUseCase {
       throw new LinkNotFoundError(codeVo.value);
     }
 
-    if (shortLink.isExpired()) {
-      throw new LinkExpiredError(shortLink.code.value, shortLink.expiresAt.value!);
+    if (shortLink.isExpired() && shortLink.expiresAt.value) {
+      throw new LinkExpiredError(shortLink.code.value, shortLink.expiresAt.value);
     }
 
     return shortLink.originalUrl.value;

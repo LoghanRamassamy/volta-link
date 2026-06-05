@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
-import { ShortenUrlUseCase } from '../../application/use-cases/shorten-url.use-case';
+import type { Request, Response } from "express";
+import type { ShortenUrlUseCase } from "../../application/use-cases/shorten-url.use-case";
 
 export class ShortenUrlController {
   constructor(private readonly shortenUrlUseCase: ShortenUrlUseCase) {}
@@ -9,15 +9,15 @@ export class ShortenUrlController {
       const { originalUrl, customCode, expiresAt } = req.body;
 
       const result = await this.shortenUrlUseCase.execute({
-        originalUrl,
         customCode,
         expiresAt,
+        originalUrl,
       });
 
       res.status(201).json(result);
-    } catch (error: any) {
+    } catch (error: unknown) {
       res.status(400).json({
-        error: error.message || 'An error occurred while shortening the URL.',
+        error: error instanceof Error ? error.message : "An error occurred",
       });
     }
   };

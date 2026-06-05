@@ -7,7 +7,11 @@
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "prisma generate && tsc",
     "start": "node dist/index.js",
-    "test": "vitest run --passWithNoTests"
+    "test": "vitest run --passWithNoTests",
+    "lint": "oxlint -c .oxlintrc.json",
+    "lint:fix": "oxlint -c .oxlintrc.json --fix",
+    "format": "oxfmt --check src",
+    "format:fix": "oxfmt src"
   },
   "dependencies": {
     "@prisma/adapter-better-sqlite3": "^7.8.0",
@@ -23,6 +27,8 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/node": "^20.12.12",
+    "oxfmt": "^0.53.0",
+    "oxlint": "^1.68.0",
     "prisma": "^7.8.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^6.0.3",

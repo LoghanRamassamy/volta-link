@@ -1,5 +1,7 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { translations, Language } from './translations';
+import type { ReactNode } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import type { Language } from "./translations";
+import { translations } from "./translations";
 
 interface LanguageContextProps {
   language: Language;
@@ -10,21 +12,21 @@ interface LanguageContextProps {
 const LanguageContext = createContext<LanguageContextProps | undefined>(undefined);
 
 const getInitialLanguage = (): Language => {
-  const savedLang = localStorage.getItem('volta-lang') as Language;
-  if (savedLang && (savedLang === 'en' || savedLang === 'fr')) {
+  const savedLang = localStorage.getItem("volta-lang") as Language;
+  if (savedLang && (savedLang === "en" || savedLang === "fr")) {
     return savedLang;
   }
-  
+
   const sysLang = navigator.language.toLowerCase();
-  if (sysLang.startsWith('fr')) {
-    return 'fr';
+  if (sysLang.startsWith("fr")) {
+    return "fr";
   }
-  
-  return 'en';
+
+  return "en";
 };
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>('en');
+  const [language, setLanguageState] = useState<Language>("en");
 
   useEffect(() => {
     setLanguageState(getInitialLanguage());
@@ -32,7 +34,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem('volta-lang', lang);
+    localStorage.setItem("volta-lang", lang);
   };
 
   const t = translations[language];
@@ -47,7 +49,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
 export const useTranslation = () => {
   const context = useContext(LanguageContext);
   if (!context) {
-    throw new Error('useTranslation must be used within a LanguageProvider');
+    throw new Error("useTranslation must be used within a LanguageProvider");
   }
   return context;
 };

@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest run --passWithNoTests"
+    "test": "vitest run --passWithNoTests",
+    "lint": "oxlint -c .oxlintrc.json",
+    "lint:fix": "oxlint -c .oxlintrc.json --fix",
+    "format": "oxfmt --check src",
+    "format:fix": "oxfmt src"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",
@@ -20,6 +24,8 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.0",
     "jest-environment-jsdom": "^29.7.0",
+    "oxfmt": "^0.53.0",
+    "oxlint": "^1.68.0",
     "typescript": "^6.0.3",
     "vite": "^5.2.11",
     "vitest": "^4.1.8"

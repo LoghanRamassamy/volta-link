@@ -1,18 +1,19 @@
-import { describe, it, expect, beforeEach, vi, Mocked } from 'vitest';
-import { ShortenUrlUseCase } from './shorten-url.use-case';
-import { ShortLinkRepository } from '../../domain/repositories/short-link.repository';
-import { CodeGenerator } from '../interfaces/code-generator.interface';
+import type { Mocked } from "vitest";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { ShortenUrlUseCase } from "./shorten-url.use-case";
+import type { ShortLinkRepository } from "../../domain/repositories/short-link.repository";
+import type { CodeGenerator } from "../interfaces/code-generator.interface";
 
-describe('ShortenUrlUseCase', () => {
+describe("ShortenUrlUseCase", () => {
   let mockRepo: Mocked<ShortLinkRepository>;
   let mockGenerator: Mocked<CodeGenerator>;
   let useCase: ShortenUrlUseCase;
 
   beforeEach(() => {
     mockRepo = {
-      save: vi.fn(),
-      findByCode: vi.fn(),
       codeExists: vi.fn(),
+      findByCode: vi.fn(),
+      save: vi.fn(),
     };
     mockGenerator = {
       generate: vi.fn(),
@@ -20,27 +21,27 @@ describe('ShortenUrlUseCase', () => {
     useCase = new ShortenUrlUseCase(mockRepo, mockGenerator);
   });
 
-  it('should successfully shorten a url with a generated code', async () => {
+  it("should successfully shorten a url with a generated code", async () => {
     mockRepo.codeExists.mockResolvedValue(false);
-    mockGenerator.generate.mockReturnValue('genXYZ');
+    mockGenerator.generate.mockReturnValue("genXYZ");
 
     const result = await useCase.execute({
-      originalUrl: 'https://google.com',
+      originalUrl: "https://google.com",
     });
 
-    expect(result.code).toBe('genXYZ');
-    expect(result.originalUrl).toBe('https://google.com');
+    expect(result.code).toBe("genXYZ");
+    expect(result.originalUrl).toBe("https://google.com");
     expect(mockRepo.save).toHaveBeenCalled();
   });
 
-  it('should throw error if custom code is already in use', async () => {
+  it("should throw error if custom code is already in use", async () => {
     mockRepo.codeExists.mockResolvedValue(true);
 
     await expect(
       useCase.execute({
-        originalUrl: 'https://google.com',
-        customCode: 'custom1',
-      })
-    ).rejects.toThrow('This custom code is already in use.');
+        customCode: "custom1",
+        originalUrl: "https://google.com",
+      }),
+    ).rejects.toThrow("This custom code is already in use.");
   });
 });

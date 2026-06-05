@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { ShortLink } from '../../../domain/entities/short-link.entity';
-import { useTranslation } from '../../i18n/LanguageContext';
-import { FormGroup } from '../molecules/FormGroup';
-import { ResultCard } from '../molecules/ResultCard';
-import { Button } from '../atoms/Button';
+import React, { useState } from "react";
+import type { ShortLink } from "../../../domain/entities/short-link.entity";
+import { useTranslation } from "../../i18n/LanguageContext";
+import { FormGroup } from "../molecules/FormGroup";
+import { ResultCard } from "../molecules/ResultCard";
+import { Button } from "../atoms/Button";
 
 interface ShortenerFormProps {
   loading: boolean;
@@ -22,9 +22,9 @@ export const ShortenerForm: React.FC<ShortenerFormProps> = ({
   onShorten,
   onCopy,
 }) => {
-  const [url, setUrl] = useState('');
-  const [customCode, setCustomCode] = useState('');
-  const [expiresAt, setExpiresAt] = useState('');
+  const [url, setUrl] = useState("");
+  const [customCode, setCustomCode] = useState("");
+  const [expiresAt, setExpiresAt] = useState("");
 
   const { t } = useTranslation();
 
@@ -35,13 +35,13 @@ export const ShortenerForm: React.FC<ShortenerFormProps> = ({
 
   const shortUrl = result
     ? `${window.location.protocol}//${window.location.hostname}:3001/${result.code}`
-    : '';
+    : "";
 
   return (
     <div className="glass-panel">
       {error && (
         <div className="bg-error-glow border border-error/20 text-red-300 px-4 py-3 rounded-xl text-[0.9rem] mb-5 flex items-center gap-2 animate-[fadeIn_0.3s_ease-out]">
-          <span>⚠️</span> {error === 'DEFAULT_GATEWAY_ERROR' ? t.errors.defaultGatewayError : error}
+          <span>⚠️</span> {error === "DEFAULT_GATEWAY_ERROR" ? t.errors.defaultGatewayError : error}
         </div>
       )}
 

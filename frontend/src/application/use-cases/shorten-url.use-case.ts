@@ -1,13 +1,16 @@
-import { ShortLinkGateway, ShortenLinkParams } from '../../domain/gateways/short-link-gateway.interface';
-import { HistoryRepository } from '../../domain/gateways/history-repository.interface';
-import { ShortLink } from '../../domain/entities/short-link.entity';
-import { OriginalUrl } from '../../domain/value-objects/original-url.vo';
-import { ExpirationDate } from '../../domain/value-objects/expiration-date.vo';
+import type {
+  ShortLinkGateway,
+  ShortenLinkParams,
+} from "../../domain/gateways/short-link-gateway.interface";
+import type { HistoryRepository } from "../../domain/gateways/history-repository.interface";
+import type { ShortLink } from "../../domain/entities/short-link.entity";
+import { OriginalUrl } from "../../domain/value-objects/original-url.vo";
+import { ExpirationDate } from "../../domain/value-objects/expiration-date.vo";
 
 export class ShortenUrlUseCase {
   constructor(
     private readonly gateway: ShortLinkGateway,
-    private readonly historyRepository: HistoryRepository
+    private readonly historyRepository: HistoryRepository,
   ) {}
 
   public async execute(params: ShortenLinkParams): Promise<ShortLink> {

@@ -1,7 +1,7 @@
-import React from 'react';
-import { ShortLink } from '../../../domain/entities/short-link.entity';
-import { Badge } from '../atoms/Badge';
-import { Button } from '../atoms/Button';
+import React from "react";
+import type { ShortLink } from "../../../domain/entities/short-link.entity";
+import { Badge } from "../atoms/Badge";
+import { Button } from "../atoms/Button";
 
 interface HistoryRowProps {
   link: ShortLink;
@@ -17,13 +17,22 @@ interface HistoryRowProps {
   };
 }
 
-export const HistoryRow: React.FC<HistoryRowProps> = ({ link, shortUrl, copiedCode, onCopy, texts }) => {
+export const HistoryRow: React.FC<HistoryRowProps> = ({
+  link,
+  shortUrl,
+  copiedCode,
+  onCopy,
+  texts,
+}) => {
   const isExpired = link.isExpired();
 
   return (
     <tr className="last:border-none">
       <td className="p-4 border-b border-white/5 align-middle text-[0.95rem]">
-        <div className="max-w-[250px] whitespace-nowrap overflow-hidden text-ellipsis text-text-dim" title={link.originalUrl.value}>
+        <div
+          className="max-w-[250px] whitespace-nowrap overflow-hidden text-ellipsis text-text-dim"
+          title={link.originalUrl.value}
+        >
           {link.originalUrl.value}
         </div>
       </td>
@@ -42,8 +51,10 @@ export const HistoryRow: React.FC<HistoryRowProps> = ({ link, shortUrl, copiedCo
       </td>
       <td className="p-4 border-b border-white/5 align-middle text-[0.95rem]">
         {link.expiresAt.value ? (
-          <Badge status={isExpired ? 'expired' : 'active'}>
-            {isExpired ? texts.expired : `${texts.expPrefix} ${new Date(link.expiresAt.value).toLocaleString()}`}
+          <Badge status={isExpired ? "expired" : "active"}>
+            {isExpired
+              ? texts.expired
+              : `${texts.expPrefix} ${new Date(link.expiresAt.value).toLocaleString()}`}
           </Badge>
         ) : (
           <Badge status="never">{texts.never}</Badge>

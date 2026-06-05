@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
-import { ShortLink } from '../../domain/entities/short-link.entity';
-import { ShortenUrlUseCase } from '../../application/use-cases/shorten-url.use-case';
-import { GetHistoryUseCase } from '../../application/use-cases/get-history.use-case';
+import { useEffect, useState } from "react";
+import type { ShortLink } from "../../domain/entities/short-link.entity";
+import type { ShortenUrlUseCase } from "../../application/use-cases/shorten-url.use-case";
+import type { GetHistoryUseCase } from "../../application/use-cases/get-history.use-case";
 
 export function useShortener(
   shortenUrlUseCase: ShortenUrlUseCase,
-  getHistoryUseCase: GetHistoryUseCase
+  getHistoryUseCase: GetHistoryUseCase,
 ) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<ShortLink | null>(null);
-  const [history, setHistory] = useState<ReadonlyArray<ShortLink>>([]);
+  const [history, setHistory] = useState<readonly ShortLink[]>([]);
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
   // Load history on mount
@@ -19,9 +19,11 @@ export function useShortener(
     getHistoryUseCase
       .execute()
       .then((data) => {
-        if (active) setHistory(data);
+        if (active) {
+          setHistory(data);
+        }
       })
-      .catch((err) => console.error('Failed to load history:', err));
+      .catch((error) => console.error("Failed to load history:", error));
 
     return () => {
       active = false;
@@ -34,17 +36,17 @@ export function useShortener(
     setResult(null);
     try {
       const link = await shortenUrlUseCase.execute({
-        originalUrl,
         customCode: customCode || undefined,
         expiresAt: expiresAt || undefined,
+        originalUrl,
       });
       setResult(link);
 
       // Refresh local history view
       const updatedHistory = await getHistoryUseCase.execute();
       setHistory(updatedHistory);
-    } catch (err: any) {
-      setError(err.message || 'An unexpected error occurred.');
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : "An unexpected error occurred.");
     } finally {
       setLoading(false);
     }
@@ -57,12 +59,12 @@ export function useShortener(
   };
 
   return {
-    loading,
-    error,
-    result,
-    history,
     copiedCode,
-    shortenUrl,
     copyToClipboard,
+    error,
+    history,
+    loading,
+    result,
+    shortenUrl,
   };
 }
