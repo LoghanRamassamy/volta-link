@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import type { ShortenUrlUseCase } from "../../application/use-cases/shorten-url.use-case";
+import type { ShortenUrlUseCase } from "@/application/use-cases/shorten-url.use-case";
 
 export class ShortenUrlController {
   constructor(private readonly shortenUrlUseCase: ShortenUrlUseCase) {}

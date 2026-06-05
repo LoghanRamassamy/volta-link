@@ -1,11 +1,11 @@
 import React from "react";
-import { MainLayout } from "../templates/MainLayout";
-import { ShortenerForm } from "../organisms/ShortenerForm";
-import { HistoryList } from "../organisms/HistoryList";
-import { useTranslation } from "../../i18n/LanguageContext";
-import { useShortener } from "../../hooks/use-shortener";
-import type { ShortenUrlUseCase } from "../../../application/use-cases/shorten-url.use-case";
-import type { GetHistoryUseCase } from "../../../application/use-cases/get-history.use-case";
+import { MainLayout } from "@/presentation/components/templates/MainLayout";
+import { ShortenerForm } from "@/presentation/components/organisms/ShortenerForm";
+import { HistoryList } from "@/presentation/components/organisms/HistoryList";
+import { useTranslation } from "@/presentation/i18n/LanguageContext";
+import { useShortener } from "@/presentation/hooks/use-shortener";
+import type { ShortenUrlUseCase } from "@/application/use-cases/shorten-url.use-case";
+import type { GetHistoryUseCase } from "@/application/use-cases/get-history.use-case";
 
 interface HomePageProps {
   shortenUrlUseCase: ShortenUrlUseCase;

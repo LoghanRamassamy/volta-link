@@ -1,5 +1,5 @@
 import React from "react";
-import type { Language } from "../../i18n/translations";
+import type { Language } from "@/presentation/i18n/translations";
 
 interface LanguageSwitcherProps {
   currentLanguage: Language;

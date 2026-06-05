@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import type { ShortLink } from "../../domain/entities/short-link.entity";
-import type { ShortenUrlUseCase } from "../../application/use-cases/shorten-url.use-case";
-import type { GetHistoryUseCase } from "../../application/use-cases/get-history.use-case";
+import type { ShortLink } from "@/domain/entities/short-link.entity";
+import type { ShortenUrlUseCase } from "@/application/use-cases/shorten-url.use-case";
+import type { GetHistoryUseCase } from "@/application/use-cases/get-history.use-case";
 
 export function useShortener(
   shortenUrlUseCase: ShortenUrlUseCase,

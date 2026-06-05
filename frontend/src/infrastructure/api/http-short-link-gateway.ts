@@ -1,10 +1,10 @@
 import type {
   ShortLinkGateway,
   ShortenLinkParams,
-} from "../../domain/gateways/short-link-gateway.interface";
-import { ShortLink } from "../../domain/entities/short-link.entity";
-import { OriginalUrl } from "../../domain/value-objects/original-url.vo";
-import { ExpirationDate } from "../../domain/value-objects/expiration-date.vo";
+} from "@/domain/gateways/short-link-gateway.interface";
+import { ShortLink } from "@/domain/entities/short-link.entity";
+import { OriginalUrl } from "@/domain/value-objects/original-url.vo";
+import { ExpirationDate } from "@/domain/value-objects/expiration-date.vo";
 
 export class HttpShortLinkGateway implements ShortLinkGateway {
   constructor(private readonly baseUrl: string) {}

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import type { ShortLink } from "../../../domain/entities/short-link.entity";
-import { useTranslation } from "../../i18n/LanguageContext";
-import { FormGroup } from "../molecules/FormGroup";
-import { ResultCard } from "../molecules/ResultCard";
-import { Button } from "../atoms/Button";
+import type { ShortLink } from "@/domain/entities/short-link.entity";
+import { useTranslation } from "@/presentation/i18n/LanguageContext";
+import { FormGroup } from "@/presentation/components/molecules/FormGroup";
+import { ResultCard } from "@/presentation/components/molecules/ResultCard";
+import { Button } from "@/presentation/components/atoms/Button";
 
 interface ShortenerFormProps {
   loading: boolean;

@@ -1,6 +1,6 @@
 import React from "react";
-import { useTranslation } from "../../i18n/LanguageContext";
-import { LanguageSwitcher } from "../molecules/LanguageSwitcher";
+import { useTranslation } from "@/presentation/i18n/LanguageContext";
+import { LanguageSwitcher } from "@/presentation/components/molecules/LanguageSwitcher";
 
 export const Header: React.FC = () => {
   const { t, language, setLanguage } = useTranslation();

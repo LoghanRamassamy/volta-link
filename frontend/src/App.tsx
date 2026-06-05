@@ -1,14 +1,14 @@
 import React from "react";
 import "./presentation/styles/index.css";
-import { HomePage } from "./presentation/components/pages/HomePage";
+import { HomePage } from "@/presentation/components/pages/HomePage";
 
 // Infrastructure Adapters
-import { HttpShortLinkGateway } from "./infrastructure/api/http-short-link-gateway";
-import { LocalStorageHistoryRepository } from "./infrastructure/storage/local-storage-history-repository";
+import { HttpShortLinkGateway } from "@/infrastructure/api/http-short-link-gateway";
+import { LocalStorageHistoryRepository } from "@/infrastructure/storage/local-storage-history-repository";
 
 // Application Use Cases
-import { ShortenUrlUseCase } from "./application/use-cases/shorten-url.use-case";
-import { GetHistoryUseCase } from "./application/use-cases/get-history.use-case";
+import { ShortenUrlUseCase } from "@/application/use-cases/shorten-url.use-case";
+import { GetHistoryUseCase } from "@/application/use-cases/get-history.use-case";
 
 // Wire up dependencies outside the React lifecycle
 const apiBaseUrl = import.meta.env.VITE_API_URL || "http://localhost:3001";

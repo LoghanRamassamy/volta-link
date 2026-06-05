@@ -1,4 +1,4 @@
-import type { ShortLink } from "../entities/short-link.entity";
+import type { ShortLink } from "@/domain/entities/short-link.entity";
 
 export interface ShortLinkRepository {
   save(shortLink: ShortLink): Promise<void>;

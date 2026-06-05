@@ -1,14 +1,14 @@
 import type { Request, Response } from "express";
-import type { GetOriginalUrlUseCase } from "../../application/use-cases/get-original-url.use-case";
-import { LinkNotFoundError } from "../../application/errors/link-not-found.error";
-import { LinkExpiredError } from "../../application/errors/link-expired.error";
+import type { GetOriginalUrlUseCase } from "@/application/use-cases/get-original-url.use-case";
+import { LinkNotFoundError } from "@/application/errors/link-not-found.error";
+import { LinkExpiredError } from "@/application/errors/link-expired.error";
 
 export class RedirectUrlController {
   constructor(private readonly getOriginalUrlUseCase: GetOriginalUrlUseCase) {}
 
   public handle = async (req: Request, res: Response): Promise<void> => {
-    const { code } = req.params;
     try {
+      const code = req.params.code as string;
       const originalUrl = await this.getOriginalUrlUseCase.execute(code);
       res.redirect(302, originalUrl);
     } catch (error: unknown) {

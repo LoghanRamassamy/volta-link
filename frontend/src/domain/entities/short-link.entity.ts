@@ -1,5 +1,5 @@
-import type { OriginalUrl } from "../value-objects/original-url.vo";
-import type { ExpirationDate } from "../value-objects/expiration-date.vo";
+import type { OriginalUrl } from "@/domain/value-objects/original-url.vo";
+import type { ExpirationDate } from "@/domain/value-objects/expiration-date.vo";
 
 export class ShortLink {
   public readonly id: string;

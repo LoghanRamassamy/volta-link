@@ -1,9 +1,9 @@
 import type { PrismaClient } from "@prisma/client";
-import type { ShortLinkRepository } from "../../domain/repositories/short-link.repository";
-import { ShortLink } from "../../domain/entities/short-link.entity";
-import { OriginalUrl } from "../../domain/value-objects/original-url.vo";
-import { UrlCode } from "../../domain/value-objects/url-code.vo";
-import { ExpirationDate } from "../../domain/value-objects/expiration-date.vo";
+import type { ShortLinkRepository } from "@/domain/repositories/short-link.repository";
+import { ShortLink } from "@/domain/entities/short-link.entity";
+import { OriginalUrl } from "@/domain/value-objects/original-url.vo";
+import { UrlCode } from "@/domain/value-objects/url-code.vo";
+import { ExpirationDate } from "@/domain/value-objects/expiration-date.vo";
 
 export class PrismaShortLinkRepository implements ShortLinkRepository {
   constructor(private readonly prisma: PrismaClient) {}

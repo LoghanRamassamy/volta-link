@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { OriginalUrl } from "./original-url.vo";
-import { ExpirationDate } from "./expiration-date.vo";
+import { OriginalUrl } from "@/domain/value-objects/original-url.vo";
+import { ExpirationDate } from "@/domain/value-objects/expiration-date.vo";
 
 describe("Frontend Value Objects", () => {
   describe("OriginalUrl", () => {

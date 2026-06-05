@@ -1,4 +1,4 @@
-import type { CodeGenerator } from "../../application/interfaces/code-generator.interface";
+import type { CodeGenerator } from "@/application/interfaces/code-generator.interface";
 import * as crypto from "crypto";
 
 export class CryptoCodeGenerator implements CodeGenerator {

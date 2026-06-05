@@ -1,7 +1,7 @@
 import React from "react";
-import type { ShortLink } from "../../../domain/entities/short-link.entity";
-import { useTranslation } from "../../i18n/LanguageContext";
-import { HistoryRow } from "../molecules/HistoryRow";
+import type { ShortLink } from "@/domain/entities/short-link.entity";
+import { useTranslation } from "@/presentation/i18n/LanguageContext";
+import { HistoryRow } from "@/presentation/components/molecules/HistoryRow";
 
 interface HistoryListProps {
   history: readonly ShortLink[];
@@ -43,7 +43,7 @@ export const HistoryList: React.FC<HistoryListProps> = ({ history, copiedCode, o
             </tr>
           </thead>
           <tbody>
-            {[...history].toReversed().map((link) => {
+            {[...history].reverse().map((link: ShortLink) => {
               const shortUrl = `${window.location.protocol}//${window.location.hostname}:3001/${link.code}`;
               return (
                 <HistoryRow

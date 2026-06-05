@@ -6,4 +6,9 @@ export default defineConfig({
     setupFiles: ["tests/setup-integration.ts"],
     fileParallelism: false, // Run integration tests sequentially to avoid DB locks
   },
+  resolve: {
+    alias: {
+      "@": "/src"
+    }
+  }
 });

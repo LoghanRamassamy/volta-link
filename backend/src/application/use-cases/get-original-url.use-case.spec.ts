@@ -1,11 +1,11 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { createMock, DeepMocked } from "@golevelup/ts-vitest";
-import { GetOriginalUrlUseCase } from "./get-original-url.use-case";
-import type { ShortLinkRepository } from "../../domain/repositories/short-link.repository";
-import { ShortLink } from "../../domain/entities/short-link.entity";
-import { OriginalUrl } from "../../domain/value-objects/original-url.vo";
-import { UrlCode } from "../../domain/value-objects/url-code.vo";
-import { ExpirationDate } from "../../domain/value-objects/expiration-date.vo";
+import { GetOriginalUrlUseCase } from "@/application/use-cases/get-original-url.use-case";
+import type { ShortLinkRepository } from "@/domain/repositories/short-link.repository";
+import { ShortLink } from "@/domain/entities/short-link.entity";
+import { OriginalUrl } from "@/domain/value-objects/original-url.vo";
+import { UrlCode } from "@/domain/value-objects/url-code.vo";
+import { ExpirationDate } from "@/domain/value-objects/expiration-date.vo";
 
 describe("GetOriginalUrlUseCase", () => {
   let mockRepo: DeepMocked<ShortLinkRepository>;

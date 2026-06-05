@@ -1,7 +1,7 @@
-import type { HistoryRepository } from "../../domain/gateways/history-repository.interface";
-import { ShortLink } from "../../domain/entities/short-link.entity";
-import { OriginalUrl } from "../../domain/value-objects/original-url.vo";
-import { ExpirationDate } from "../../domain/value-objects/expiration-date.vo";
+import type { HistoryRepository } from "@/domain/gateways/history-repository.interface";
+import { ShortLink } from "@/domain/entities/short-link.entity";
+import { OriginalUrl } from "@/domain/value-objects/original-url.vo";
+import { ExpirationDate } from "@/domain/value-objects/expiration-date.vo";
 
 export class LocalStorageHistoryRepository implements HistoryRepository {
   private readonly STORAGE_KEY = "volta_shorten_history";
@@ -32,11 +32,11 @@ export class LocalStorageHistoryRepository implements HistoryRepository {
       const parsed = JSON.parse(stored) as Record<string, unknown>[];
       return parsed.map((item) =>
         ShortLink.create({
-          code: item.code,
-          createdAt: new Date(item.createdAt),
-          expiresAt: ExpirationDate.create(item.expiresAt),
-          id: item.id,
-          originalUrl: OriginalUrl.create(item.originalUrl),
+          code: item.code as string,
+          createdAt: new Date(item.createdAt as string),
+          expiresAt: ExpirationDate.create((item.expiresAt as string) || null),
+          id: item.id as string,
+          originalUrl: OriginalUrl.create(item.originalUrl as string),
         }),
       );
     } catch (error) {

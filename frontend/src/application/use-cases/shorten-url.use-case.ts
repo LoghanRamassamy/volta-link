@@ -1,11 +1,11 @@
 import type {
   ShortLinkGateway,
   ShortenLinkParams,
-} from "../../domain/gateways/short-link-gateway.interface";
-import type { HistoryRepository } from "../../domain/gateways/history-repository.interface";
-import type { ShortLink } from "../../domain/entities/short-link.entity";
-import { OriginalUrl } from "../../domain/value-objects/original-url.vo";
-import { ExpirationDate } from "../../domain/value-objects/expiration-date.vo";
+} from "@/domain/gateways/short-link-gateway.interface";
+import type { HistoryRepository } from "@/domain/gateways/history-repository.interface";
+import type { ShortLink } from "@/domain/entities/short-link.entity";
+import { OriginalUrl } from "@/domain/value-objects/original-url.vo";
+import { ExpirationDate } from "@/domain/value-objects/expiration-date.vo";
 
 export class ShortenUrlUseCase {
   constructor(

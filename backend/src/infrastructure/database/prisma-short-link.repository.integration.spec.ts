@@ -1,10 +1,10 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { PrismaShortLinkRepository } from "./prisma-short-link.repository";
+import { PrismaShortLinkRepository } from "@/infrastructure/database/prisma-short-link.repository";
 import { prisma } from "../../../tests/setup-integration";
-import { ShortLink } from "../../domain/entities/short-link.entity";
-import { OriginalUrl } from "../../domain/value-objects/original-url.vo";
-import { UrlCode } from "../../domain/value-objects/url-code.vo";
-import { ExpirationDate } from "../../domain/value-objects/expiration-date.vo";
+import { ShortLink } from "@/domain/entities/short-link.entity";
+import { OriginalUrl } from "@/domain/value-objects/original-url.vo";
+import { UrlCode } from "@/domain/value-objects/url-code.vo";
+import { ExpirationDate } from "@/domain/value-objects/expiration-date.vo";
 
 describe("PrismaShortLinkRepository (Integration)", () => {
   let repository: PrismaShortLinkRepository;

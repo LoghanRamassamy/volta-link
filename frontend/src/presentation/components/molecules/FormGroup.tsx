@@ -1,6 +1,6 @@
 import React from "react";
-import { Label } from "../atoms/Label";
-import { Input } from "../atoms/Input";
+import { Label } from "@/presentation/components/atoms/Label";
+import { Input } from "@/presentation/components/atoms/Input";
 
 interface FormGroupProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;

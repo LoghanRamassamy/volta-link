@@ -1,11 +1,11 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { createMock, DeepMocked } from "@golevelup/ts-vitest";
-import { ShortenUrlUseCase } from "./shorten-url.use-case";
-import type { ShortLinkGateway } from "../../domain/gateways/short-link-gateway.interface";
-import type { HistoryRepository } from "../../domain/gateways/history-repository.interface";
-import { ShortLink } from "../../domain/entities/short-link.entity";
-import { OriginalUrl } from "../../domain/value-objects/original-url.vo";
-import { ExpirationDate } from "../../domain/value-objects/expiration-date.vo";
+import { ShortenUrlUseCase } from "@/application/use-cases/shorten-url.use-case";
+import type { ShortLinkGateway } from "@/domain/gateways/short-link-gateway.interface";
+import type { HistoryRepository } from "@/domain/gateways/history-repository.interface";
+import { ShortLink } from "@/domain/entities/short-link.entity";
+import { OriginalUrl } from "@/domain/value-objects/original-url.vo";
+import { ExpirationDate } from "@/domain/value-objects/expiration-date.vo";
 
 describe("Frontend ShortenUrlUseCase", () => {
   let mockGateway: DeepMocked<ShortLinkGateway>;

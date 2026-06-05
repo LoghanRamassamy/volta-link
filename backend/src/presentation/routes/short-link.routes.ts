@@ -1,7 +1,7 @@
 import { Router } from "express";
-import type { ShortenUrlController } from "../controllers/shorten-url.controller";
-import type { RedirectUrlController } from "../controllers/redirect-url.controller";
-import { createAuthMiddleware } from "../middlewares/auth.middleware";
+import type { ShortenUrlController } from "@/presentation/controllers/shorten-url.controller";
+import type { RedirectUrlController } from "@/presentation/controllers/redirect-url.controller";
+import { createAuthMiddleware } from "@/presentation/middlewares/auth.middleware";
 
 export function createShortLinkRouter(
   shortenUrlController: ShortenUrlController,

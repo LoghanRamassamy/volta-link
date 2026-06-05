@@ -1,10 +1,10 @@
-import { ShortLink } from "../../domain/entities/short-link.entity";
-import type { ShortLinkRepository } from "../../domain/repositories/short-link.repository";
-import { OriginalUrl } from "../../domain/value-objects/original-url.vo";
-import { UrlCode } from "../../domain/value-objects/url-code.vo";
-import { ExpirationDate } from "../../domain/value-objects/expiration-date.vo";
-import type { CodeGenerator } from "../interfaces/code-generator.interface";
-import type { ShortenUrlRequest, ShortenUrlResponse } from "../dtos/shorten-url.dto";
+import { ShortLink } from "@/domain/entities/short-link.entity";
+import type { ShortLinkRepository } from "@/domain/repositories/short-link.repository";
+import { OriginalUrl } from "@/domain/value-objects/original-url.vo";
+import { UrlCode } from "@/domain/value-objects/url-code.vo";
+import { ExpirationDate } from "@/domain/value-objects/expiration-date.vo";
+import type { CodeGenerator } from "@/application/interfaces/code-generator.interface";
+import type { ShortenUrlRequest, ShortenUrlResponse } from "@/application/dtos/shorten-url.dto";
 import * as crypto from "crypto";
 
 export class ShortenUrlUseCase {

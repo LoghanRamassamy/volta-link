@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
-import { createExpressApp } from "./infrastructure/server/app";
+import { createExpressApp } from "@/infrastructure/server/app";
 
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 

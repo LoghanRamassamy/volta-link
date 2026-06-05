@@ -1,7 +1,7 @@
 import React from "react";
-import type { ShortLink } from "../../../domain/entities/short-link.entity";
-import { Badge } from "../atoms/Badge";
-import { Button } from "../atoms/Button";
+import type { ShortLink } from "@/domain/entities/short-link.entity";
+import { Badge } from "@/presentation/components/atoms/Badge";
+import { Button } from "@/presentation/components/atoms/Button";
 
 interface HistoryRowProps {
   link: ShortLink;
