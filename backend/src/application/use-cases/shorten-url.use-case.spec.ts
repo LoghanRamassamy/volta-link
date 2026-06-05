@@ -1,23 +1,17 @@
-import type { Mocked } from "vitest";
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
+import { createMock, DeepMocked } from "@golevelup/ts-vitest";
 import { ShortenUrlUseCase } from "./shorten-url.use-case";
 import type { ShortLinkRepository } from "../../domain/repositories/short-link.repository";
 import type { CodeGenerator } from "../interfaces/code-generator.interface";
 
 describe("ShortenUrlUseCase", () => {
-  let mockRepo: Mocked<ShortLinkRepository>;
-  let mockGenerator: Mocked<CodeGenerator>;
+  let mockRepo: DeepMocked<ShortLinkRepository>;
+  let mockGenerator: DeepMocked<CodeGenerator>;
   let useCase: ShortenUrlUseCase;
 
   beforeEach(() => {
-    mockRepo = {
-      codeExists: vi.fn(),
-      findByCode: vi.fn(),
-      save: vi.fn(),
-    };
-    mockGenerator = {
-      generate: vi.fn(),
-    };
+    mockRepo = createMock<ShortLinkRepository>();
+    mockGenerator = createMock<CodeGenerator>();
     useCase = new ShortenUrlUseCase(mockRepo, mockGenerator);
   });
 

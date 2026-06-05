@@ -8,6 +8,7 @@
     "build": "prisma generate && tsc",
     "start": "node dist/index.js",
     "test": "vitest run --passWithNoTests",
+    "test:integration": "vitest run -c vitest.integration.config.ts",
     "lint": "oxlint -c .oxlintrc.json",
     "lint:fix": "oxlint -c .oxlintrc.json --fix",
     "format": "oxfmt --check src",
@@ -23,6 +24,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@golevelup/ts-vitest": "^4.0.0",
     "@types/better-sqlite3": "^7.6.13",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",

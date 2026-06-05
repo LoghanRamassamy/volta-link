@@ -1,5 +1,5 @@
-import type { Mocked } from "vitest";
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
+import { createMock, DeepMocked } from "@golevelup/ts-vitest";
 import { ShortenUrlUseCase } from "./shorten-url.use-case";
 import type { ShortLinkGateway } from "../../domain/gateways/short-link-gateway.interface";
 import type { HistoryRepository } from "../../domain/gateways/history-repository.interface";
@@ -8,19 +8,13 @@ import { OriginalUrl } from "../../domain/value-objects/original-url.vo";
 import { ExpirationDate } from "../../domain/value-objects/expiration-date.vo";
 
 describe("Frontend ShortenUrlUseCase", () => {
-  let mockGateway: Mocked<ShortLinkGateway>;
-  let mockRepo: Mocked<HistoryRepository>;
+  let mockGateway: DeepMocked<ShortLinkGateway>;
+  let mockRepo: DeepMocked<HistoryRepository>;
   let useCase: ShortenUrlUseCase;
 
   beforeEach(() => {
-    mockGateway = {
-      shorten: vi.fn(),
-    };
-    mockRepo = {
-      clear: vi.fn(),
-      getAll: vi.fn(),
-      save: vi.fn(),
-    };
+    mockGateway = createMock<ShortLinkGateway>();
+    mockRepo = createMock<HistoryRepository>();
     useCase = new ShortenUrlUseCase(mockGateway, mockRepo);
   });
 
