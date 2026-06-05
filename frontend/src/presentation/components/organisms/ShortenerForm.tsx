@@ -40,7 +40,7 @@ export const ShortenerForm: React.FC<ShortenerFormProps> = ({
   return (
     <div className="glass-panel">
       {error && (
-        <div className="alert-error">
+        <div className="bg-error-glow border border-error/20 text-red-300 px-4 py-3 rounded-xl text-[0.9rem] mb-5 flex items-center gap-2 animate-[fadeIn_0.3s_ease-out]">
           <span>⚠️</span> {error === 'DEFAULT_GATEWAY_ERROR' ? t.errors.defaultGatewayError : error}
         </div>
       )}
@@ -57,7 +57,7 @@ export const ShortenerForm: React.FC<ShortenerFormProps> = ({
           disabled={loading}
         />
 
-        <div className="form-row">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6">
           <FormGroup
             id="custom-code-input"
             label={t.form.customCodeLabel}

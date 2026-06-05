@@ -6,5 +6,12 @@ interface BadgeProps {
 }
 
 export const Badge: React.FC<BadgeProps> = ({ status, children }) => {
-  return <span className={`badge badge-${status}`}>{children}</span>;
+  const baseClasses = 'inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold uppercase';
+  const statusClasses = {
+    active: 'bg-success-bg text-success-text border border-success-border',
+    expired: 'bg-error-bg text-error-text border border-error-border',
+    never: 'bg-never-bg text-text-dim border border-never-border',
+  };
+  
+  return <span className={`${baseClasses} ${statusClasses[status]}`}>{children}</span>;
 };

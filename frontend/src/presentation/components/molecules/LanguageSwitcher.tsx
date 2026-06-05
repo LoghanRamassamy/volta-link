@@ -8,32 +8,16 @@ interface LanguageSwitcherProps {
 
 export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ currentLanguage, onLanguageChange }) => {
   return (
-    <div style={{ position: 'absolute', top: 0, right: 0, display: 'flex', gap: '5px' }}>
+    <div className="absolute top-0 right-0 flex gap-1.5">
       <button 
         onClick={() => onLanguageChange('en')} 
-        style={{ 
-          background: currentLanguage === 'en' ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
-          border: 'none',
-          color: 'white',
-          cursor: 'pointer',
-          padding: '5px 10px',
-          borderRadius: '4px',
-          fontSize: '14px'
-        }}
+        className={`border-none text-white cursor-pointer px-2.5 py-1.5 rounded text-sm transition-colors ${currentLanguage === 'en' ? 'bg-white/20' : 'bg-transparent hover:bg-white/10'}`}
       >
         EN
       </button>
       <button 
         onClick={() => onLanguageChange('fr')} 
-        style={{ 
-          background: currentLanguage === 'fr' ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
-          border: 'none',
-          color: 'white',
-          cursor: 'pointer',
-          padding: '5px 10px',
-          borderRadius: '4px',
-          fontSize: '14px'
-        }}
+        className={`border-none text-white cursor-pointer px-2.5 py-1.5 rounded text-sm transition-colors ${currentLanguage === 'fr' ? 'bg-white/20' : 'bg-transparent hover:bg-white/10'}`}
       >
         FR
       </button>

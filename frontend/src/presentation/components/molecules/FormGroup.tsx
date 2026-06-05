@@ -9,7 +9,7 @@ interface FormGroupProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export const FormGroup: React.FC<FormGroupProps> = ({ id, label, ...inputProps }) => {
   return (
-    <div className="form-group">
+    <div className="flex flex-col gap-2 mb-5">
       <Label htmlFor={id}>{label}</Label>
       <Input id={id} {...inputProps} />
     </div>

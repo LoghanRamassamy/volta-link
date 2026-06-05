@@ -18,16 +18,16 @@ export const HistoryList: React.FC<HistoryListProps> = ({ history, copiedCode, o
 
   return (
     <div className="glass-panel">
-      <h2>{t.history.title}</h2>
-      <div className="table-container">
-        <table>
+      <h2 className="text-2xl font-bold text-text-main mb-5 flex items-center gap-2">{t.history.title}</h2>
+      <div className="overflow-x-auto mt-2">
+        <table className="w-full border-collapse text-left">
           <thead>
             <tr>
-              <th>{t.history.originalUrl}</th>
-              <th>{t.history.shortCode}</th>
-              <th>{t.history.created}</th>
-              <th>{t.history.expiration}</th>
-              <th>{t.history.action}</th>
+              <th className="px-4 py-3 text-text-muted text-xs font-bold uppercase tracking-wider border-b border-white/5">{t.history.originalUrl}</th>
+              <th className="px-4 py-3 text-text-muted text-xs font-bold uppercase tracking-wider border-b border-white/5">{t.history.shortCode}</th>
+              <th className="px-4 py-3 text-text-muted text-xs font-bold uppercase tracking-wider border-b border-white/5">{t.history.created}</th>
+              <th className="px-4 py-3 text-text-muted text-xs font-bold uppercase tracking-wider border-b border-white/5">{t.history.expiration}</th>
+              <th className="px-4 py-3 text-text-muted text-xs font-bold uppercase tracking-wider border-b border-white/5">{t.history.action}</th>
             </tr>
           </thead>
           <tbody>

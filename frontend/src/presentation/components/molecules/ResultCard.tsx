@@ -21,10 +21,10 @@ export const ResultCard: React.FC<ResultCardProps> = ({
   copiedText,
 }) => {
   return (
-    <div className="result-card">
-      <label>{label}</label>
-      <div className="result-row">
-        <a href={shortUrl} target="_blank" rel="noopener noreferrer" className="result-url">
+    <div className="mt-6 bg-brand/5 border border-dashed border-brand/30 rounded-2xl p-5 flex flex-col gap-3 animate-[slideIn_0.4s_ease-out]">
+      <label className="text-[0.85rem] font-semibold text-text-dim uppercase tracking-[0.05em]">{label}</label>
+      <div className="flex items-center justify-between gap-4">
+        <a href={shortUrl} target="_blank" rel="noopener noreferrer" className="text-xl font-bold text-accent no-underline break-all hover:underline">
           {shortUrl}
         </a>
         <Button variant="secondary" onClick={() => onCopy(code, shortUrl)}>
