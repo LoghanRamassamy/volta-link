@@ -17,27 +17,9 @@ export class ShortenUrlUseCase {
     const originalUrlVo = OriginalUrl.create(request.originalUrl);
     const expiresAtVo = ExpirationDate.create(request.expiresAt);
 
-    let codeVo: UrlCode;
-
-    if (request.customCode) {
-      codeVo = UrlCode.create(request.customCode);
-      const exists = await this.shortLinkRepository.codeExists(codeVo.value);
-      if (exists) {
-        throw new Error('This custom code is already in use.');
-      }
-    } else {
-      // Generate a unique code
-      let generatedCode = this.codeGenerator.generate(6);
-      let attempts = 0;
-      while (await this.shortLinkRepository.codeExists(generatedCode)) {
-        generatedCode = this.codeGenerator.generate(6);
-        attempts++;
-        if (attempts > 10) {
-          throw new Error('Could not generate a unique short code after several attempts.');
-        }
-      }
-      codeVo = UrlCode.create(generatedCode);
-    }
+    const codeVo = request.customCode 
+      ? await this.validateCustomCode(request.customCode)
+      : await this.generateUniqueCode();
 
     const shortLinkId = crypto.randomUUID();
     const shortLink = ShortLink.create({
@@ -56,5 +38,25 @@ export class ShortenUrlUseCase {
       createdAt: shortLink.createdAt.toISOString(),
       expiresAt: shortLink.expiresAt.value ? shortLink.expiresAt.value.toISOString() : null,
     };
+  }
+
+  private async validateCustomCode(customCode: string): Promise<UrlCode> {
+    const codeVo = UrlCode.create(customCode);
+    const exists = await this.shortLinkRepository.codeExists(codeVo.value);
+    if (exists) {
+      throw new Error('This custom code is already in use.');
+    }
+    return codeVo;
+  }
+
+  private async generateUniqueCode(attempts: number = 0): Promise<UrlCode> {
+    if (attempts > 10) {
+      throw new Error('Could not generate a unique short code after several attempts.');
+    }
+    
+    const generatedCode = this.codeGenerator.generate(6);
+    const exists = await this.shortLinkRepository.codeExists(generatedCode);
+    
+    return exists ? this.generateUniqueCode(attempts + 1) : UrlCode.create(generatedCode);
   }
 }

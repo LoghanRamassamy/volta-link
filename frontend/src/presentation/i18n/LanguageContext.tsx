@@ -9,23 +9,25 @@ interface LanguageContextProps {
 
 const LanguageContext = createContext<LanguageContextProps | undefined>(undefined);
 
+const getInitialLanguage = (): Language => {
+  const savedLang = localStorage.getItem('volta-lang') as Language;
+  if (savedLang && (savedLang === 'en' || savedLang === 'fr')) {
+    return savedLang;
+  }
+  
+  const sysLang = navigator.language.toLowerCase();
+  if (sysLang.startsWith('fr')) {
+    return 'fr';
+  }
+  
+  return 'en';
+};
+
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>('en');
 
   useEffect(() => {
-    // Determine initial language
-    const savedLang = localStorage.getItem('volta-lang') as Language;
-    if (savedLang && (savedLang === 'en' || savedLang === 'fr')) {
-      setLanguageState(savedLang);
-    } else {
-      // Check system language
-      const sysLang = navigator.language.toLowerCase();
-      if (sysLang.startsWith('fr')) {
-        setLanguageState('fr');
-      } else {
-        setLanguageState('en');
-      }
-    }
+    setLanguageState(getInitialLanguage());
   }, []);
 
   const setLanguage = (lang: Language) => {

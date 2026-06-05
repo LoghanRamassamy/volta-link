@@ -14,11 +14,15 @@ export class RedirectUrlController {
     } catch (error: any) {
       if (error instanceof LinkNotFoundError) {
         res.status(404).send(this.renderErrorPage('Link Not Found', 'The requested shortened link does not exist.'));
-      } else if (error instanceof LinkExpiredError) {
+        return;
+      } 
+      
+      if (error instanceof LinkExpiredError) {
         res.status(410).send(this.renderErrorPage('Link Expired', 'The requested link has expired and is no longer available.'));
-      } else {
-        res.status(400).send(this.renderErrorPage('Invalid Request', error.message || 'An error occurred.'));
+        return;
       }
+      
+      res.status(400).send(this.renderErrorPage('Invalid Request', error.message || 'An error occurred.'));
     }
   };
 
