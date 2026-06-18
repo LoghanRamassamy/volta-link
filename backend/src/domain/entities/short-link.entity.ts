@@ -41,7 +41,7 @@ export class ShortLink {
   }
 
   public isExpired(now: Date = new Date()): boolean {
-    if (this.expiresAt.value === null) {
+    if (null === this.expiresAt.value) {
       return false;
     }
     return now.getTime() > this.expiresAt.value.getTime();

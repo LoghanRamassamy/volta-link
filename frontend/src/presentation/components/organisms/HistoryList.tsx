@@ -43,7 +43,7 @@ export const HistoryList: React.FC<HistoryListProps> = ({ history, copiedCode, o
             </tr>
           </thead>
           <tbody>
-            {[...history].reverse().map((link: ShortLink) => {
+            {[...history].toReversed().map((link: ShortLink) => {
               const shortUrl = `${window.location.protocol}//${window.location.hostname}:3001/${link.code}`;
               return (
                 <HistoryRow

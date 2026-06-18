@@ -7,7 +7,7 @@ import { OriginalUrl } from "@/domain/value-objects/original-url.vo";
 import { ExpirationDate } from "@/domain/value-objects/expiration-date.vo";
 
 export class HttpShortLinkGateway implements ShortLinkGateway {
-  constructor(private readonly baseUrl: string) { }
+  constructor(private readonly baseUrl: string) {}
 
   public async shorten(params: ShortenLinkParams): Promise<ShortLink> {
     const response = await fetch(`${this.baseUrl}/api/shorten`, {

@@ -7,7 +7,7 @@ export class OriginalUrl {
   }
 
   public static create(value: string): OriginalUrl {
-    if (!value || typeof value !== "string") {
+    if (!value || "string" !== typeof value) {
       throw new Error("URL must be a non-empty string.");
     }
     const trimmed = value.trim();

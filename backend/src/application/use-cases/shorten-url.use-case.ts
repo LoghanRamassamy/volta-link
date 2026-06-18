@@ -50,7 +50,7 @@ export class ShortenUrlUseCase {
   }
 
   private async generateUniqueCode(attempts: number = 0): Promise<UrlCode> {
-    if (attempts > 10) {
+    if (10 < attempts) {
       throw new Error("Could not generate a unique short code after several attempts.");
     }
 

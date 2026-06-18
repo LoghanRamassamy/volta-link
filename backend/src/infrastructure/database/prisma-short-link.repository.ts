@@ -48,6 +48,6 @@ export class PrismaShortLinkRepository implements ShortLinkRepository {
     const count = await this.prisma.shortLink.count({
       where: { code },
     });
-    return count > 0;
+    return 0 < count;
   }
 }

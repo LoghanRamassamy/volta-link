@@ -30,10 +30,10 @@ export class LocalStorageHistoryRepository implements HistoryRepository {
 
     try {
       const parsed = JSON.parse(stored);
-      if (!Array.isArray(parsed)) return [];
+      if (!Array.isArray(parsed)) {return [];}
 
       return parsed.map((item) => {
-        if (!item || typeof item !== "object") throw new Error("Invalid format");
+        if (!item || typeof item !== "object") {throw new Error("Invalid format");}
         return ShortLink.create({
           code: String(item.code),
           createdAt: new Date(String(item.createdAt)),

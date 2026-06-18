@@ -10,11 +10,11 @@ export class ExpirationDate {
     value: Date | string | null | undefined,
     referenceDate: Date = new Date(),
   ): ExpirationDate {
-    if (value === null || value === undefined || value === "") {
+    if (null === value || value === undefined || "" === value) {
       return new ExpirationDate(null);
     }
 
-    const date = typeof value === "string" ? new Date(value) : value;
+    const date = "string" === typeof value ? new Date(value) : value;
 
     if (isNaN(date.getTime())) {
       throw new TypeError("Invalid expiration date format.");

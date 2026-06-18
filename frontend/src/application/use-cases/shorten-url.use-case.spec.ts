@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { createMock, DeepMocked } from "@golevelup/ts-vitest";
+import type { DeepMocked } from "@golevelup/ts-vitest";
+import { createMock } from "@golevelup/ts-vitest";
 import { ShortenUrlUseCase } from "@/application/use-cases/shorten-url.use-case";
 import type { ShortLinkGateway } from "@/domain/gateways/short-link-gateway.interface";
 import type { HistoryRepository } from "@/domain/gateways/history-repository.interface";
