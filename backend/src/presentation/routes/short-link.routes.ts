@@ -6,9 +6,14 @@ import { createAuthMiddleware } from "@/presentation/middlewares/auth.middleware
 export function createShortLinkRouter(
   shortenUrlController: ShortenUrlController,
   redirectUrlController: RedirectUrlController,
-  apiKey: string,
 ): Router {
   const router = Router();
+
+  const apiKey = process.env.API_KEY;
+  if (!apiKey) {
+    throw new Error("API_KEY is not defined");
+  }
+
   const authMiddleware = createAuthMiddleware(apiKey);
 
   // Protected route: Create a new short link
